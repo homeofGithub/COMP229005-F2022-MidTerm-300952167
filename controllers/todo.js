@@ -48,6 +48,25 @@ module.exports.details = (req, res, next) => {
 module.exports.displayEditPage = (req, res, next) => {
     
     // ADD YOUR CODE HERE
+    let id = req.params.id;
+
+    InventoryModel.findById(id, (err, itemToEdit) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            //show the edit view
+            res.render('todo/add_edit', {
+                title: 'Edit Item', 
+                todo: itemToEdit,
+                userName: req.user ? req.user.username : ''
+            })
+        }
+    });
+
 
 }
 
@@ -67,19 +86,57 @@ module.exports.processEditPage = (req, res, next) => {
 
     // ADD YOUR CODE HERE
 
+    InventoryModel.updateOne({_id: id}, updatedTodo, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // console.log(req.body);
+            // refresh the book list
+            res.redirect('/todo/list');
+        }
+    });
+
 }
 
 // Deletes a todo based on its id.
 module.exports.performDelete = (req, res, next) => {
 
     // ADD YOUR CODE HERE
+    let id = req.params.id
+
+    TodoModel.remove({_id: id}, (err) => {
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // refresh the book list
+            res.redirect('/todo/list');
+        }
+    });
+
+
 
 }
 
 // Renders the Add form using the add_edit.ejs template
 module.exports.displayAddPage = (req, res, next) => {
 
-    // ADD YOUR CODE HERE          
+    // ADD YOUR CODE HERE     
+    let newTodo = TodoModel();   
+    
+    res.render('todo/add_edit',{
+        title: 'Add a New Todo Information',
+        todo: newTodo,
+        userName: req.user ? req.user.username : ''
+
+    } )
 
 }
 
@@ -96,5 +153,17 @@ module.exports.processAddPage = (req, res, next) => {
     });
 
     // ADD YOUR CODE HERE
-    
+    InventoryModel.create(newTodo, (err, item) =>{
+        if(err)
+        {
+            console.log(err);
+            res.end(err);
+        }
+        else
+        {
+            // refresh the book list
+            console.log(item);
+            res.redirect('/todo/list');
+        }
+    });
 }
