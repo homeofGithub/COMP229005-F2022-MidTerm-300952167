@@ -1,7 +1,8 @@
 // Filename: appclient.js
-// Student: Julio Vinicius
-// StudentId: 123456789
-// Date: Jun 02, 2022
+// Student: Yi Chen
+// StudentId: 300952167
+// Date: Oct 26, 2022
+// Web app name: Midterm
 
 console.log('app script is working.');
 

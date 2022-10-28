@@ -50,7 +50,7 @@ module.exports.displayEditPage = (req, res, next) => {
     // ADD YOUR CODE HERE
     let id = req.params.id;
 
-    InventoryModel.findById(id, (err, itemToEdit) => {
+    TodoModel.findById(id, (err, itemToEdit) => {
         if(err)
         {
             console.log(err);
@@ -86,7 +86,7 @@ module.exports.processEditPage = (req, res, next) => {
 
     // ADD YOUR CODE HERE
 
-    InventoryModel.updateOne({_id: id}, updatedTodo, (err) => {
+    TodoModel.updateOne({_id: id}, updatedTodo, (err) => {
         if(err)
         {
             console.log(err);
@@ -153,7 +153,7 @@ module.exports.processAddPage = (req, res, next) => {
     });
 
     // ADD YOUR CODE HERE
-    InventoryModel.create(newTodo, (err, item) =>{
+    TodoModel.create(newTodo, (err, item) =>{
         if(err)
         {
             console.log(err);
