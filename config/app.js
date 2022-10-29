@@ -10,6 +10,11 @@ let session = require('express-session');
 let flash = require('connect-flash');
 let passport = require('passport');
 
+
+let indexRouter = require('../routes/index');
+let usersRouter = require('../routes/users');
+let todoRouter = require('../routes/todo');
+
 let app = express();
 
 app.use(session({
@@ -19,9 +24,7 @@ app.use(session({
 }));
 
 
-let indexRouter = require('../routes/index');
-let usersRouter = require('../routes/users');
-let todoRouter = require('../routes/todo');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
